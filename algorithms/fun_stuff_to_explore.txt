@@ -1,0 +1,5 @@
+before continuing with alg's: 
+  **play around with C and memory management (look at mistakes with memory-management and security-vuln's from this)
+    ^spend time here...
+
+

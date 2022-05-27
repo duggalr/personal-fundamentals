@@ -1,0 +1,5 @@
+Basic NN with numpy
+Transformer with numpy (attention-heads)
+
+**for fun after, implement some basic stuff (ie. derivative, etc. in lisp)
+
