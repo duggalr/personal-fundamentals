@@ -1,5 +1,10 @@
+**key is, this is not merely implementation; think/learn-deeply about the theory too
+  ie. communication between neurons during fw/bw-pass
+
 Basic NN with numpy
 Transformer with numpy (attention-heads)
+Hopfield Net (<-- associative memory review)
+Program Synthesis (starting with basic, non-DL ones)
 
 **for fun after, implement some basic stuff (ie. derivative, etc. in lisp)
 

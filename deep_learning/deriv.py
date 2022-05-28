@@ -29,7 +29,6 @@ class CustomFunction(object):
   def plot_func(self, n):
     x_vals = list(range(0,n))
     y_vals = [self.c * (i ** self.exponent) for i in range(0,n)]
-    print(x_vals, y_vals)
     plt.plot(x_vals, y_vals, label = "function")
     plt.xlabel('x - axis')
     plt.ylabel('y - axis')
