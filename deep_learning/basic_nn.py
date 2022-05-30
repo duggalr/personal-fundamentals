@@ -98,103 +98,87 @@ class SimpleNeuralNet(object):
 
 
 
-# examples = [
-#   [2,4],
-#   [4,6],
-#   [1,3],
-#   [6,10],
-#   [5,7],
-#   [9,11],
-#   [15,21],
-#   [22,30],
-#   [12,24],
-#   [7,13],
-#   [16,18],
-#   [16,17],
-#   [20,21],
-#   [30,32],
-#   [35,39]
-# ]
+examples = [
+  [2,4],
+  [4,6],
+  [1,3],
+  [6,10],
+  [5,7],
+  [9,11],
+  [15,21],
+  [22,30],
+  [12,24],
+  [7,13],
+  [16,18],
+  [16,17],
+  [20,21],
+  [30,32],
+  [35,39]
+]
 
-# labels = [
-#   [1, 0],
-#   [1, 0],
-#   [0, 1],
-#   [1, 0],
-#   [0, 1],
-#   [0, 1],
-#   [0, 1],
-#   [1, 0],
-#   [1, 0],
-#   [0, 1],
-#   [1, 0],
-#   [0, 1],
-#   [0, 1],
-#   [1, 0],
-#   [0, 1],
-# ]
+labels = [
+  [1, 0],
+  [1, 0],
+  [0, 1],
+  [1, 0],
+  [0, 1],
+  [0, 1],
+  [0, 1],
+  [1, 0],
+  [1, 0],
+  [0, 1],
+  [1, 0],
+  [0, 1],
+  [0, 1],
+  [1, 0],
+  [0, 1],
+]
 
-# validation_examples = [
-#   [6,8],
-#   [3,4],
-#   [11,19],
-#   [1,1],
-#   [2,4]
-# ]
+validation_examples = [
+  [6,8],
+  [3,4],
+  [11,19],
+  [1,1],
+  [2,4]
+]
 
-# validation_labels = [
-#   [1, 0],
-#   [0, 1],
-#   [0, 1],
-#   [0, 1],
-#   [1, 0]
-# ]
+validation_labels = [
+  [1, 0],
+  [0, 1],
+  [0, 1],
+  [0, 1],
+  [1, 0]
+]
 n = SimpleNeuralNet(input_dim=2, num_activation_units=2, output_dim=2)
 # n.train(examples, labels, validation_examples, validation_labels, num_epoches=10, graph_display=True)
 # prediction = n.predict(np.array(validation_examples[0]).reshape(2, 1))
 # print(prediction)
 
-
-
-linear_input_examples = [
-  [0, 1],
-  [1, 2],
-  [2, 1],
-  [2, 2]
-]
-
-linear_input_labels = [
-  [1, 0],
-  [1, 0],
-  [0, 1],
-  [0, 1]
-]
-
-n = SimpleNeuralNet(input_dim=2, num_activation_units=4, output_dim=2)
-n.train(linear_input_examples, linear_input_labels, num_epoches=100, graph_display=False)
-print(n.predict([3, 3]))
-print(n.predict([1.5, 3]))
-print(n.predict([1.5, 1.5]))
-
 # TODO: why is it predicting 50/50? (double-check the fw/bw-pass); test data on pytorch?
 
 
-# pred_values = n._fw_pass(np.array(examples[0]).reshape(2, 1))
-# print(pred_values)
-# cost = n._cost_function(pred_values, np.array(labels[0]).reshape(2, 1))
-# print(n.output_layer_weights, n.hidden_layer_weights)
-# n._bw_pass(np.array(examples[0]).reshape(2, 1), pred_values, np.array(labels[0]).reshape(2, 1))
-# print(n.output_layer_weights, n.hidden_layer_weights)
-# n.train(examples, labels, num_epoches=10)
-
-# input_vector = np.asarray([2,4])
+## Linear Decision Boundary Fit ##
+# linear_input_examples = [
+#   [0, 1],
+#   [1, 2],
+#   [2, 1],
+#   [2, 2]
+# ]
+# linear_input_labels = [
+#   [1, 0],
+#   [1, 0],
+#   [0, 1],
+#   [0, 1]
+# ]
 # n = SimpleNeuralNet(input_dim=2, num_activation_units=4, output_dim=2)
-# input_vector = input_vector.reshape(2, 1)
-# actual_values = np.asarray([1,0])
-# softmax_values = n.fw_pass(input_vector)
-# print('predictions: {} / actual: {}'.format(softmax_values, actual_values,))
-# print(n.cost_function(softmax_values, actual_values))
-# n.bw_pass(input_vector, softmax_values, actual_values)
+# n.train(linear_input_examples, linear_input_labels, num_epoches=100, graph_display=False)
+# print(n.predict([3, 3]))
+# print(n.predict([1.5, 3]))
+# print(n.predict([1.5, 1.5]))
+
+
+
+
 
 
 
