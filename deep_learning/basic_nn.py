@@ -59,7 +59,8 @@ class SimpleNeuralNet(object):
       for y in range(len(examples)):
         input_vector = np.array(examples[y])
         input_label = np.array(labels[y])
-        input_vector = input_vector.reshape(2, 1)
+        # TODO: should allow for any dimension
+        input_vector = input_vector.reshape(2, 1)  
         input_label = input_label.reshape(2, 1)
         pred_label = self._fw_pass(input_vector)
         cost = self._cost_function(pred_label, input_label)
@@ -98,6 +99,59 @@ class SimpleNeuralNet(object):
 
 
 
+# examples = [
+#   [2,4],
+#   [4,6],
+#   [1,3],
+#   [6,10],
+#   [5,7],
+#   [9,11],
+#   [15,21],
+#   [22,30],
+#   [12,24],
+#   [7,13],
+#   [16,18],
+#   [16,17],
+#   [20,21],
+#   [30,32],
+#   [35,39]
+# ]
+
+# labels = [
+#   [1, 0],
+#   [1, 0],
+#   [0, 1],
+#   [1, 0],
+#   [0, 1],
+#   [0, 1],
+#   [0, 1],
+#   [1, 0],
+#   [1, 0],
+#   [0, 1],
+#   [1, 0],
+#   [0, 1],
+#   [0, 1],
+#   [1, 0],
+#   [0, 1],
+# ]
+
+# validation_examples = [
+#   [6,8],
+#   [3,4],
+#   [11,19],
+#   [1,1],
+#   [2,4]
+# ]
+
+# validation_labels = [
+#   [1, 0],
+#   [0, 1],
+#   [0, 1],
+#   [0, 1],
+#   [1, 0]
+# ]
+
+
 examples = [
   [2,4],
   [4,6],
@@ -115,24 +169,13 @@ examples = [
   [30,32],
   [35,39]
 ]
-
-labels = [
-  [1, 0],
-  [1, 0],
-  [0, 1],
-  [1, 0],
-  [0, 1],
-  [0, 1],
-  [0, 1],
-  [1, 0],
-  [1, 0],
-  [0, 1],
-  [1, 0],
-  [0, 1],
-  [0, 1],
-  [1, 0],
-  [0, 1],
-]
+labels = [1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0]
+labels_text = []
+for l in labels:
+  if l == 1:
+    labels_text.append('even')
+  else:
+    labels_text.append('odd')
 
 validation_examples = [
   [6,8],
@@ -141,20 +184,28 @@ validation_examples = [
   [1,1],
   [2,4]
 ]
+validation_labels = [1, 0, 0, 0, 1]
 
-validation_labels = [
-  [1, 0],
-  [0, 1],
-  [0, 1],
-  [0, 1],
-  [1, 0]
-]
-n = SimpleNeuralNet(input_dim=2, num_activation_units=2, output_dim=2)
-# n.train(examples, labels, validation_examples, validation_labels, num_epoches=10, graph_display=True)
+fig, ax = plt.subplots()
+scatter = ax.scatter(np.array(examples)[:, 0], np.array(examples)[:, 0], c=labels, cmap="RdBu")
+# plt.scatter(np.array(examples)[:, 0], np.array(examples)[:, 0], c=labels, cmap="RdBu")
+ax.legend(*scatter.legend_elements())
+plt.show()
+
+
+# ax.scatter(X[:,0],X[:,1], c=y, s=50,cmap="RdBu")
+# ax.get_figure()
+
+# n = SimpleNeuralNet(input_dim=2, num_activation_units=2, output_dim=1)
+#
+#  n.train(examples, labels, validation_examples, validation_labels, num_epoches=10, graph_display=True)
 # prediction = n.predict(np.array(validation_examples[0]).reshape(2, 1))
 # print(prediction)
 
-# TODO: why is it predicting 50/50? (double-check the fw/bw-pass); test data on pytorch?
+# TODO: 
+  # why is it predicting 50/50? (double-check the fw/bw-pass); test data on pytorch?
+  # test linear/non-linear data from sklearn as well
+
 
 
 ## Linear Decision Boundary Fit ##
