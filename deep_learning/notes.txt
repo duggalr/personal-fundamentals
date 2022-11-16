@@ -1,10 +1,34 @@
 **key is, this is not merely implementation; think/learn-deeply about the theory too
   ie. communication between neurons during fw/bw-pass
 
-Basic NN with numpy
-Transformer with numpy (attention-heads)
+
+
+Fundamental:
+- Basic NN with numpy
+- Seq-to-Seq (enc/decoder) with attention
+  - Transformer with numpy (attention-heads)
+^building out the basic architecture in numpy**
+^building out some of the models we are using in pytorch** (ie. bert-lm, RAG, EDER2)
+
+- **Hyperbolic Embeddings <-- and looking at the underlying optimization methods here
+  - https://arxiv.org/pdf/1804.03329.pdf
+
+- **Boltzmann machines, Cell-Assemblies 
+- **Since this is more on the side, thinking deeply about AI more so from scientific perspective <-- 'neural-code'
+
+**Detour into CV (convolution, recent transformer arch's, etc.)
+Understanding at other optimization algorithms (especially related to statistics, optimization, fitting mathematical models on data)
+- Expectation–maximization algorithm
+- https://en.wikipedia.org/wiki/Coordinate_descent 
+- other optimiztaion algorithms than G.D. <-- why G.D?
+
 Hopfield Net (<-- associative memory review)
-Program Synthesis (starting with basic, non-DL ones)
+Program Synthesis (starting with basic, non-DL ones) <-- even/odd, list-sorting, etc. (compare with DL; potential mergers?)
+Going through some of the papers in my new/side-papers directory
 
 **for fun after, implement some basic stuff (ie. derivative, etc. in lisp)
+
+- Linguistics: 
+  - Mainly chomsky's theory of UG (from mathematical perspective)
+
 

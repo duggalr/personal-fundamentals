@@ -2,16 +2,22 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.special import softmax
+from sklearn.datasets import make_classification
+
 
 
 class SimpleNeuralNet(object):
   """
   Basic 1-layer NN 
   """
-  def __init__(self, input_dim, num_activation_units, output_dim, learning_rate=0.01) -> None:
+  def __init__(self, input_dim, num_activation_units, output_dim, learning_rate=0.01, output_layer_fn='softmax') -> None:
     self.input_dim = input_dim
     self.num_activation_units = num_activation_units
-    self.output_dim = output_dim
+    if output_layer_fn == 'softmax':
+      assert output_dim != 1, 'softmax with output dimension 1?'
+      self.output_dim = output_dim
+    else: 
+      self.output_dim = output_dim
     self.hidden_layer_weights = np.random.normal(size=(self.input_dim, self.num_activation_units))
     self.output_layer_weights = np.random.normal(size=(self.num_activation_units, self.output_dim))
     self.learning_rate = learning_rate
@@ -47,9 +53,9 @@ class SimpleNeuralNet(object):
     """
     assuming one-hot encoding of the label
     """
-    assert len(examples) == len(labels)
+    assert len(examples) == len(labels), "Length Mismatch between train examples and labels"
     if validation_examples is not None:
-      assert len(validation_examples) == len(validation_labels)
+      assert len(validation_examples) == len(validation_labels), "Length Mismatch between validation examples and labels"
 
     train_cost_list, validation_cost_list = [], []
     for i in range(num_epoches):
@@ -58,10 +64,12 @@ class SimpleNeuralNet(object):
       epoch_cost = 0
       for y in range(len(examples)):
         input_vector = np.array(examples[y])
-        input_label = np.array(labels[y])
-        # TODO: should allow for any dimension
-        input_vector = input_vector.reshape(2, 1)  
-        input_label = input_label.reshape(2, 1)
+        # print(input_vector, input_vector.shape)
+        input_vector = input_vector.reshape(input_vector.shape[0], 1)
+        input_label = labels[y]
+        input_label = input_label.reshape(input_label.shape[0], 1)
+        # input_vector = input_vector.reshape(2, 1)  
+        # input_label = input_label.reshape(2, 1)
         pred_label = self._fw_pass(input_vector)
         cost = self._cost_function(pred_label, input_label)
         epoch_cost += cost
@@ -99,6 +107,50 @@ class SimpleNeuralNet(object):
 
 
 
+def graph_data(examples, labels):
+  fig, ax = plt.subplots()
+  scatter = ax.scatter(examples[:, 0], examples[:, 1], c=labels, cmap="RdBu")
+  # plt.scatter(np.array(examples)[:, 0], np.array(examples)[:, 0], c=labels, cmap="RdBu")
+  ax.legend(*scatter.legend_elements())
+  ax.set_xlabel('Input : X1')
+  ax.set_ylabel('Input : X2')
+  plt.show()
+
+
+def one_hot_encode(labels, unique_classes):
+  one_hot_labels = [np.zeros(len(unique_classes)) for i in range(len(labels))]
+  # for l in labels:
+  for i in range(len(labels)):
+    l = labels[i]
+    one_hot_vector = one_hot_labels[i]
+    one_hot_vector[l] = 1
+
+  return one_hot_labels
+
+
+# TODO: 
+  # generalize to allow the sklearn data and any dimension input/output
+  # add sigmoid for output along with softmax 
+
+## Linear Decision Boundary Fit ##
+X, y = make_classification(n_samples=20, n_features=2, n_informative=2, n_redundant=0, n_classes=2, random_state=7, n_clusters_per_class=1)
+# graph_data(X, y)
+one_hot_labels = one_hot_encode(y, unique_classes=[0, 1])
+# print(X.reshape(X.shape[0], 1))
+# print( X[0].reshape(2, 1) )
+# print( np.array(one_hot_labels[0]).reshape(2, 1) )
+# print(X[0].shape, type(X[0][0]))
+
+n = SimpleNeuralNet(input_dim=2, num_activation_units=4, output_dim=2, output_layer_fn='softmax')
+n.train(X, one_hot_labels, num_epoches=10, graph_display=False)
+# TODO: plot decision-boundary on the data to see if this is 'really training' and go from there
+# print(n.predict([3, 3]))
+# print(n.predict([1.5, 3]))
+# print(n.predict([1.5, 1.5]))
+
+
+
+
 # examples = [
 #   [2,4],
 #   [4,6],
@@ -116,24 +168,14 @@ class SimpleNeuralNet(object):
 #   [30,32],
 #   [35,39]
 # ]
-
-# labels = [
-#   [1, 0],
-#   [1, 0],
-#   [0, 1],
-#   [1, 0],
-#   [0, 1],
-#   [0, 1],
-#   [0, 1],
-#   [1, 0],
-#   [1, 0],
-#   [0, 1],
-#   [1, 0],
-#   [0, 1],
-#   [0, 1],
-#   [1, 0],
-#   [0, 1],
-# ]
+# labels = [1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0]
+# labels_text = []
+# for l in labels:
+#   if l == 1:
+#     labels_text.append('even')
+#   else:
+#     labels_text.append('odd')
+# graph_data(np.array(examples), labels)
 
 # validation_examples = [
 #   [6,8],
@@ -142,94 +184,17 @@ class SimpleNeuralNet(object):
 #   [1,1],
 #   [2,4]
 # ]
-
-# validation_labels = [
-#   [1, 0],
-#   [0, 1],
-#   [0, 1],
-#   [0, 1],
-#   [1, 0]
-# ]
+# validation_labels = [1, 0, 0, 0, 1]
 
 
-examples = [
-  [2,4],
-  [4,6],
-  [1,3],
-  [6,10],
-  [5,7],
-  [9,11],
-  [15,21],
-  [22,30],
-  [12,24],
-  [7,13],
-  [16,18],
-  [16,17],
-  [20,21],
-  [30,32],
-  [35,39]
-]
-labels = [1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0]
-labels_text = []
-for l in labels:
-  if l == 1:
-    labels_text.append('even')
-  else:
-    labels_text.append('odd')
 
-validation_examples = [
-  [6,8],
-  [3,4],
-  [11,19],
-  [1,1],
-  [2,4]
-]
-validation_labels = [1, 0, 0, 0, 1]
-
-fig, ax = plt.subplots()
-scatter = ax.scatter(np.array(examples)[:, 0], np.array(examples)[:, 0], c=labels, cmap="RdBu")
-# plt.scatter(np.array(examples)[:, 0], np.array(examples)[:, 0], c=labels, cmap="RdBu")
-ax.legend(*scatter.legend_elements())
-plt.show()
-
-
-# ax.scatter(X[:,0],X[:,1], c=y, s=50,cmap="RdBu")
-# ax.get_figure()
-
-# n = SimpleNeuralNet(input_dim=2, num_activation_units=2, output_dim=1)
-#
-#  n.train(examples, labels, validation_examples, validation_labels, num_epoches=10, graph_display=True)
-# prediction = n.predict(np.array(validation_examples[0]).reshape(2, 1))
-# print(prediction)
 
 # TODO: 
-  # why is it predicting 50/50? (double-check the fw/bw-pass); test data on pytorch?
-  # test linear/non-linear data from sklearn as well
+# - Finish the NN program first 
+  # - Test out, visualize, **explore width/height of activation units**, other theoretical explorations, etc. 
+  # Train on MNIST
 
-
-
-## Linear Decision Boundary Fit ##
-# linear_input_examples = [
-#   [0, 1],
-#   [1, 2],
-#   [2, 1],
-#   [2, 2]
-# ]
-# linear_input_labels = [
-#   [1, 0],
-#   [1, 0],
-#   [0, 1],
-#   [0, 1]
-# ]
-# n = SimpleNeuralNet(input_dim=2, num_activation_units=4, output_dim=2)
-# n.train(linear_input_examples, linear_input_labels, num_epoches=100, graph_display=False)
-# print(n.predict([3, 3]))
-# print(n.predict([1.5, 3]))
-# print(n.predict([1.5, 1.5]))
-
-
-
-
+      
 
 
 

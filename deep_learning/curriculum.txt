@@ -1,0 +1,59 @@
+
+**Only real point of 'curriculum' is I don't get too side-tracked:
+  - even for my side-learnings, want majority of my focus to be related to deep-learning
+  - **absolute no 'timeline', etc. here; just making time daily (except fridays)
+
+"Curriculum":
+  - Algorithms: 
+    - Leetcode problems on strings, searching, etc.
+    - MIT-OCW problem-sets
+  - Project Euler: 
+    - Go through a good % of these
+
+"Curriculum":  (<-- alot of this can be done when learning 'applications' of these concepts)
+  - Core Foundations: 
+    - Stats/Probability: 
+      - go through (core-parts) first_course_in_prob textbook and work through exercises
+        - personal detours are good...
+      - maximum-estimation-likelihood problems 
+        - ^detour here to optimization problems 
+    - Calculus: 
+      - Spivak's Calculus book (core-parts) & partial-derivatives 
+
+
+"Currciulum":
+  - On the side, really exploring program-synthesis <-- old/current approachs (understanding the 'framework' and application to problems)
+
+
+"Curriculum":
+  - Quantitive Finance
+    - ie. 
+      https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-with-applications-in-finance-fall-2013/
+      https://ocw.mit.edu/courses/15-450-analytics-of-finance-fall-2010/
+    - Specifically looking at current financial models for 'portfolio-optimization'
+      - finding cheaper asset's/industries (systematic value investing)
+      - optimizing risk, determining the current 'market-cycle' based on micro/marco-conditions, etc.
+      - detour to Crypto <-- can this stuff above apply here?
+
+
+"Curriculum":
+  - Focusing entirely first on Deep Learning:
+    - Basic NN with Numpy 
+      - Spend some time on the visualizations, theoretical/practical-aspects here on training
+        - Train MNIST and some other artifically generated datasets 
+    - Basic Transformer with Numpy
+      - Spend some time on the visualizations, theoretical/practical-aspects here on training
+        - Run through simple translation task <-- just to ensure training is done correctly
+    - **Detour to different Optimization techniques <-- this would be very helpful (**looking at older papers is helpful**)
+      - Different learning techniques in general as well (<-- implementing/playing around with other 'pattern-processing' techniques)
+        - **program-synthesis, assembly-calculus
+    - Modern mathematics of Deep Learning: (<-- don't need to spend too long here)
+      - go through Ian Goodfellow's / Michael Nelson's textbook <-- create/do the exercises 
+      - go through recent papers on theoretical/mathematical aspects of deep learning 
+        - detouring to math/probability-exercises here is good (don't need to do too much...)
+    - Computer Vision or Reinforcement Learning: (<-- good to spread knowledge outside of NLP...)
+      - Do a basic ('nebolous') SP I am interested in here:
+        - **RL-agent trained for 8-ball pool
+          - knows how to play for position, etc. 
+
+
