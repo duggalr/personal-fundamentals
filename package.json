@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@openzeppelin/cli": "^2.8.2",
-    "@openzeppelin/contracts": "^4.7.3",
-    "solc": "^0.8.17"
-  }
-}
