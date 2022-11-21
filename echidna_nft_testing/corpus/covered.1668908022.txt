@@ -1,0 +1,45 @@
+/Users/rahul/Documents/main/personal_learning_projects/fundamentals/echidna_nft_testing/EchidnaExampleToken.sol
+    | // SPDX-License-Identifier: MIT
+    | pragma solidity ^0.8.4;
+    | 
+    | import './ExampleToken.sol';
+    | 
+*r  | 
+    | contract EchidnaTokenTest is ExampleToken{
+    | 
+    |   // balance must be >= 0
+    |   function echidna_balance_gte_zero() public view returns(bool){
+    |     return balances[msg.sender] >= 0;
+    |   }
+    | 
+    | }
+    | 
+    | 
+    | 
+
+/Users/rahul/Documents/main/personal_learning_projects/fundamentals/echidna_nft_testing/ExampleToken.sol
+    | // SPDX-License-Identifier: MIT
+    | pragma solidity ^0.8.4;
+    | 
+    | 
+    | contract ExampleToken{
+    | 
+*   |   mapping(address => uint) public balances;
+    | 
+*   |   function airdrop() public{
+*   |     balances[msg.sender] = 1000;
+    |   }
+    | 
+*r  |   function consume() public{
+*r  |     require(balances[msg.sender]>0);
+*   |     balances[msg.sender] -= 1;
+    |   }
+    | 
+*   |   function backdoor() public{
+*   |     balances[msg.sender] += 1;
+    |   }
+    | 
+    | }
+    | 
+    | 
+    | 
